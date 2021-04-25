@@ -1,0 +1,39 @@
+<h2>Estimate</h2>
+<div>
+    Welcome: {{loggedInUser.type}} user
+</div>
+<div>
+    <form [formGroup]="estimateForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="goldPrice">Gold Price (Per gram)</label>
+            <input type="text" formControlName="goldPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.goldPrice.errors }" />
+            <div *ngIf="submitted && f.goldPrice.errors" class="invalid-feedback">
+                <div *ngIf="f.goldPrice.errors.required">Gold price is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight (grams)</label>
+            <input type="number" formControlName="weight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.weight.errors }" />
+            <div *ngIf="submitted && f.weight.errors" class="invalid-feedback">
+                <div *ngIf="f.weight.errors.required">Weight is required</div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="isDiscountOn">
+            <label for="discount">Discount %</label>
+            <input type="number" formControlName="discount" value="2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.discount.errors }" />
+            <div *ngIf="submitted && f.discount.errors" class="invalid-feedback">
+                <div *ngIf="f.discount.errors.required">Discount is required</div>
+            </div>
+        </div>
+        <div *ngIf="isTotalAvailable">
+            <label for="total">Total Price: </label> {{totalPrice |currency:'INR'}}
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Calculate
+            </button>
+        </div>
+
+    </form>
+</div>
