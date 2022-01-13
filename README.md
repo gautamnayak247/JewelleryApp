@@ -1,4 +1,4 @@
-# JewelleryApp
+# Jewellery Application By Gautam
 
 1. First restore the BacPac
 2. Host the api in local
